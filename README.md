@@ -52,35 +52,35 @@ GROUP MEMBERS: NICK BATTJES, NATHAN HARRIS, HAN CHEN
 
 DAY 1:
 - Nick: finalize animation for trash compactor, start on fire animation.
-- Nate: 
+- Nate: Work on something
 - Han:
 
 DAY 2:
 - Nick: continue fire animation, work on integrating animation for trash compactor with margin adjustment.
-- Nate: 
+- Nate:
 - Han:
 
 DAY 3:
 - Nick: Hopefully get fire and trash compactor to both work with dom elements.
-- Nate: 
+- Nate:
 - Han:
 
 DAY 4:
 - Nick: Continue work on trash compactor and fire, finish them.
-- Nate: 
+- Nate:
 - Han:
 
 DAY 5:
 - Nick: Start work on stretch animations, if able.
-- Nate: 
+- Nate:
 - Han:
 
 DAY 6:
 - Nick: Make sure everything works!
-- Nate: 
+- Nate:
 - Han:
 
 DAY 7:
 - Nick: Finalize menu implementation.
-- Nate: 
+- Nate:
 - Han:
