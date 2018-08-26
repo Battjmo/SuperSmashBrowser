@@ -11,9 +11,12 @@ Nearly every day, we see something on the internet that makes us angry or sad, a
 -[ ] There will be a popup window that allows a user to select a destruction mode, and offer instructions for how to use it.
 
 -[ ] The user will be able to destroy the browser in a variety of ways, tentatively including:
-1. Making all the content disappear in a graceful wave.
-2. Smashomg the content in a trash compactor.
-3. Consuming the content with fire.
+1. Vanish: make all the content disappear in a graceful wave.
+2. Trash compactor: walls come in from sides of the screen, crushing the content into a little box in the middle.
+3. Fire: user will click the screen to make a fire start there, which will consume the content.
+Stretch Modes:
+1. Earthquake: screen shake, followed by elements falling off the screen.
+2. Hammer: Mouse
 
 ### Bonus Features
 1. Built-in ability to save and share GIF's of your destruction.
@@ -39,7 +42,7 @@ This part should hopefully be pretty simple: the user will be presented with a s
 - Made animation program for the trash compactor mode.
 - Developed an alorithm for selecting all the DOM elements on a page and making them gracefully disappear.
 - Researched using canvas to make sprites appear in response to mouse inputs.
-- 
+- Developed algorithm for making dom elements spin around like wild things.
 
 
 ## Implementation Timeline
@@ -52,31 +55,31 @@ DAY 1:
 - Han:
 
 DAY 2:
-- Nick: Finish fire animation.
+- Nick: continue fire animation, work on integrating animation for trash compactor with margin adjustment.
 - Nate: 
 - Han:
 
 DAY 3:
-- Nick: .
+- Nick: Hopefully get fire and trash compactor to both work with dom elements.
 - Nate: 
 - Han:
 
 DAY 4:
-- Nick: .
+- Nick: Continue work on trash compactor and fire, finish them.
 - Nate: 
 - Han:
 
 DAY 5:
-- Nick: .
+- Nick: Start work on stretch animations, if able.
 - Nate: 
 - Han:
 
 DAY 6:
-- Nick: .
+- Nick: Make sure everything works!
 - Nate: 
 - Han:
 
 DAY 7:
-- Nick: .
+- Nick: Finalize menu implementation.
 - Nate: 
 - Han:

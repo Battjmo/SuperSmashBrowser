@@ -89,8 +89,8 @@ class Walls {
         this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         this.drawSideWalls();
 
-        if (this.leftPos + this.wallWidth === this.rightPos - this.boxSize) {
-            this.wallSpeed = 0;
+        if (this.leftPos + this.wallWidth + this.boxSize === this.rightPos) {
+            this.wallSpeed =  -this.wallSpeed;
             this.hitMiddle = true;
         }
 
@@ -98,12 +98,18 @@ class Walls {
             this.wallSpeed = 0;
         }
 
-        if (this.hitMiddle) {
-            this.wallSpeed = 0;
-        } else {
-            this.wallSpeed += 0.01;
-        }
+        // if (this.hitMiddle) {
+        //     this.wallSpeed = 0;
+        // } else {
+        //     this.wallSpeed += 0.01;
+        // }
 
+
+        this.leftPos += this.wallSpeed;
+        this.rightPos -= this.wallSpeed;
+
+
+        //MANUAL WALL MOVEMENT
         //moving the left and right walls
         // if (this.leftPos + this.wallWidth + this.boxSize === (this.rightPos)) {
         //     console.log("hit middle!")
@@ -123,14 +129,8 @@ class Walls {
         //     }
         // }
 
-        if (this.leftPos < 0 && this.rightPos > this.canvasWidth) {
-
-        }
 
 
-
-        this.leftPos += this.wallSpeed;
-        this.rightPos -= this.wallSpeed;
 
         window.requestAnimationFrame(this.draw.bind(this));
 }
