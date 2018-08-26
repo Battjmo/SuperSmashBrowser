@@ -27,7 +27,7 @@ Stretch Modes:
 - JavaScript, JavaScript, and more JavaScript for DOM manipulation
 - HTML5 Canvas for animation
 - Chome tools for extension implementation
-- HTML2Canvas Library to take screenshots of the DOM, which we will then manipulate for certain modes.
+- HTML2Canvas jQuery plugin to take screenshots of the DOM, which we will then manipulate for certain modes.
 
 ### Interacting With the Browser
 - We will compose a variety of functions that enable us to select the relevant DOM elements for the chosen destruction methods and place them in an array for easy manipulation.
