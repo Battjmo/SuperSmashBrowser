@@ -14,9 +14,10 @@ Nearly every day, we see something on the internet that makes us angry or sad, a
 1. Vanish: make all the content disappear in a graceful wave.
 2. Trash compactor: walls come in from sides of the screen, crushing the content into a little box in the middle.
 3. Fire: user will click the screen to make a fire start there, which will consume the content.
+4. Earthquake: screen shake, followed by elements falling off the screen.
 Stretch Modes:
-1. Earthquake: screen shake, followed by elements falling off the screen.
-2. Hammer: Mouse
+1. Hammer: User can destroy elements by click
+2. Pac-Man: Contents get eaten by your favorite arcade hero.
 
 ### Bonus Features
 1. Built-in ability to save and share GIF's of your destruction.
@@ -52,35 +53,40 @@ GROUP MEMBERS: NICK BATTJES, NATHAN HARRIS, HAN CHEN
 
 DAY 1:
 - Nick: finalize animation for trash compactor, start on fire animation.
-- Nate: Work on something
+- Nate: Work on logic for DOM manipulation
+  - Methods of DOM traversal
+  - Integration of potential canvas overlays
+  - Click handlers for content containers
 - Han:
-
+- Team: 
+  - Complete project skeleton
+  - Basic extension functionality (popup, settings, etc)
 DAY 2:
 - Nick: continue fire animation, work on integrating animation for trash compactor with margin adjustment.
-- Nate:
+- Nate: Have ability to grab elements/containers with a click, begin animations
 - Han:
 
 DAY 3:
 - Nick: Hopefully get fire and trash compactor to both work with dom elements.
-- Nate:
+- Nate: Complete DOM element removal animations 
 - Han:
 
 DAY 4:
 - Nick: Continue work on trash compactor and fire, finish them.
-- Nate:
+- Nate: Smooth out animation functions, contents can be restored without refreshing?
 - Han:
 
 DAY 5:
 - Nick: Start work on stretch animations, if able.
-- Nate:
+- Nate: Testing and deployment to chrome store by end of day
 - Han:
 
 DAY 6:
 - Nick: Make sure everything works!
-- Nate:
+- Nate: Add potential bonus features
 - Han:
 
 DAY 7:
 - Nick: Finalize menu implementation.
-- Nate:
+- Nate: Add potential bonus features
 - Han:
