@@ -94,7 +94,7 @@ class Walls {
             this.hitMiddle = true;
         }
 
-        if (this.leftPos + this.wallWidth <= 0) {
+        if (this.leftPos + this.wallWidth < 0) {
             this.wallSpeed = 0;
         }
 
