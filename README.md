@@ -39,7 +39,7 @@ This part should hopefully be pretty simple: the user will be presented with a s
 - Made animation program for the trash compactor mode.
 - Developed an alorithm for selecting all the DOM elements on a page and making them gracefully disappear.
 - Researched using canvas to make sprites appear in response to mouse inputs.
-- 
+-
 
 
 ## Implementation Timeline
@@ -48,35 +48,35 @@ GROUP MEMBERS: NICK BATTJES, NATHAN HARRIS, HAN CHEN
 
 DAY 1:
 - Nick: finalize animation for trash compactor, start on fire animation.
-- Nate: 
-- Han:
+- Nate:
+- Han: finalize the backbone of the chrome extension
 
 DAY 2:
 - Nick: Finish fire animation.
-- Nate: 
-- Han:
+- Nate:
+- Han: Integrate backbone with Nick and Nate's code.
 
 DAY 3:
 - Nick: .
-- Nate: 
-- Han:
+- Nate:
+- Han: TBD
 
 DAY 4:
 - Nick: .
-- Nate: 
-- Han:
+- Nate:
+- Han: TBD
 
 DAY 5:
 - Nick: .
-- Nate: 
-- Han:
+- Nate:
+- Han: TBD
 
 DAY 6:
 - Nick: .
-- Nate: 
-- Han:
+- Nate:
+- Han: TBD
 
 DAY 7:
 - Nick: .
-- Nate: 
-- Han:
+- Nate:
+- Han: TBD

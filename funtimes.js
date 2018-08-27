@@ -6,6 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
     walls.draw();
 })
 
+// These two functions are used to send data to the storage,
+// They will be defined when we decided on what to send
+// data() {
+//
+// }
+
+// chrome.runtime.sendMessage(data);
+
 class Walls {
     constructor(ctx, canvas) {
         this.ctx = ctx;
