@@ -46,47 +46,46 @@ This part should hopefully be pretty simple: the user will be presented with a s
 - Researched using canvas to make sprites appear in response to mouse inputs.
 - Developed algorithm for making dom elements spin around like wild things.
 
-
 ## Implementation Timeline
 ---
 GROUP MEMBERS: NICK BATTJES, NATHAN HARRIS, HAN CHEN
 
 DAY 1:
-- Nick: finalize animation for trash compactor, start on fire animation.
 - Nate: Work on logic for DOM manipulation
   - Methods of DOM traversal
   - Integration of potential canvas overlays
   - Click handlers for content containers
-- Han:
+  - Han: Integrate backbone with Nick and Nate's code.
 - Team: 
   - Complete project skeleton
   - Basic extension functionality (popup, settings, etc)
 DAY 2:
 - Nick: continue fire animation, work on integrating animation for trash compactor with margin adjustment.
 - Nate: Have ability to grab elements/containers with a click, begin animations
-- Han:
+- Han: TBD
 
 DAY 3:
 - Nick: Hopefully get fire and trash compactor to both work with dom elements.
 - Nate: Complete DOM element removal animations 
-- Han:
+- Han: TBD
 
 DAY 4:
 - Nick: Continue work on trash compactor and fire, finish them.
 - Nate: Smooth out animation functions, contents can be restored without refreshing?
-- Han:
+- Han: TBD
 
 DAY 5:
 - Nick: Start work on stretch animations, if able.
 - Nate: Testing and deployment to chrome store by end of day
-- Han:
+- Han: TBD
 
 DAY 6:
 - Nick: Make sure everything works!
 - Nate: Add potential bonus features
-- Han:
+- Han: TBD
 
 DAY 7:
 - Nick: Finalize menu implementation.
 - Nate: Add potential bonus features
-- Han:
+- Han: TBD
+
