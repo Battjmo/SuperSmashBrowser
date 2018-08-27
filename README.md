@@ -56,36 +56,36 @@ DAY 1:
   - Integration of potential canvas overlays
   - Click handlers for content containers
   - Han: Integrate backbone with Nick and Nate's code.
-- Team: 
+- Team:
   - Complete project skeleton
   - Basic extension functionality (popup, settings, etc)
+
 DAY 2:
 - Nick: continue fire animation, work on integrating animation for trash compactor with margin adjustment.
 - Nate: Have ability to grab elements/containers with a click, begin animations
-- Han: TBD
+- Han: Test extension to make sure existing features are integrated without bugs.
 
 DAY 3:
 - Nick: Hopefully get fire and trash compactor to both work with dom elements.
-- Nate: Complete DOM element removal animations 
-- Han: TBD
+- Nate: Complete DOM element removal animations
+- Han: Work on integrating new features into extension
 
 DAY 4:
 - Nick: Continue work on trash compactor and fire, finish them.
 - Nate: Smooth out animation functions, contents can be restored without refreshing?
-- Han: TBD
+- Han: Test and update already integrated features
 
 DAY 5:
 - Nick: Start work on stretch animations, if able.
 - Nate: Testing and deployment to chrome store by end of day
-- Han: TBD
+- Han: Help Nate with testing and deployment
 
 DAY 6:
 - Nick: Make sure everything works!
 - Nate: Add potential bonus features
-- Han: TBD
+- Han: Work on bonus features
 
 DAY 7:
 - Nick: Finalize menu implementation.
 - Nate: Add potential bonus features
-- Han: TBD
-
+- Han: Work on bonus features
