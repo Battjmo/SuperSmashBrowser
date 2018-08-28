@@ -10,6 +10,9 @@
 // Constructor for Shape objects to hold data for all drawn objects.
 // For now they will just be defined as rectangles.
 // w, h, fill
+
+import html2canvas from 'html2canvas';
+
 function Shape(x, y, w, h) {
     // This is a very simple and unsafe constructor. All we're doing is checking if the values exist.
     // "x || 0" just means "if there is a value for x, use that. Otherwise use 0."
@@ -237,6 +240,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Lets make some partially transparent
     s.addShape(new Shape(80, 150, 60, 30, 'rgba(127, 255, 212, .5)'));
     s.addShape(new Shape(125, 80, 30, 80, 'rgba(245, 222, 179, .7)'));
+
+    html2canvas(document.body).then(function(canvas) {
+        var newImage = canvas.toDataURL("image/png");
+        window.open(newImage, "_blank");
+    });
 });
 
 
