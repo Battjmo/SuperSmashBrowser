@@ -11,10 +11,10 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-  "storage"
+  "tabs"
 ],
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
-    "js": ["funtimes.js"]
+    "js": ["content_script.js"]
   }]
 }
