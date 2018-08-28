@@ -47,7 +47,7 @@ const animate = (children, delay) => {
       animate(children.slice(1), delay);
     }, delay);
   }
-}
+};
 
 
 document.addEventListener('click', (e) => {
