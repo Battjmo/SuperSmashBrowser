@@ -1,0 +1,23 @@
+{
+  "name": "super_smash_browser",
+  "version": "1.0.0",
+  "description": "## SUMMARY AND BACKGROUND ---",
+  "main": "fire.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Battjmo/SuperSmashBrowser.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Battjmo/SuperSmashBrowser/issues"
+  },
+  "homepage": "https://github.com/Battjmo/SuperSmashBrowser#readme",
+  "dependencies": {
+    "html2canvas": "^1.0.0-alpha.12"
+  }
+}
