@@ -2,6 +2,10 @@
   cursor: url("wand3.png"), auto;
 }
 
+*:active {
+  cursor: url("starWand.png"), auto;
+}
+
 html {
     height:100%;
 }
