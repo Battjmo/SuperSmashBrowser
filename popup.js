@@ -2,7 +2,7 @@ let button = document.getElementById('button');
 
 button.addEventListener("click", function() {
   chrome.tabs.query({ active:true, currentWindow: true}, function(tabs) {
-    console.log(`${button.id}`);
+    console.log("click regiestered in popup");
     chrome.tabs.sendMessage(tabs[0].id, {type: `${button.id}`});
   })
 });
