@@ -1,9 +1,9 @@
 * {
-  cursor: url("wand3.png"), auto;
+  cursor: url("hammer.png"), auto;
 }
 
 *:active {
-  cursor: url("starWand.png"), auto;
+  cursor: url("sidewaysHammer.png"), auto;
 }
 
 html {
