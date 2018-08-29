@@ -1,6 +1,7 @@
 console.log('content script loaded');
 chrome.runtime.onMessage.addListener(function(request, sender) {
+  vanish = new VanishEverything;
   if (request.type === 'button') {
-    console.log("i have been clicked");
+    vanish.run();
   }
 });
