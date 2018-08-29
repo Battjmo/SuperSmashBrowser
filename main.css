@@ -1,10 +1,10 @@
-* {
+/* * {
   cursor: url("hammer.png"), auto;
 }
 
 *:active {
   cursor: url("sidewaysHammer.png"), auto;
-}
+} */
 
 html {
     height:100%;
@@ -26,5 +26,11 @@ canvas {
 .test {
   position: absolute;
   z-index: 1;
+}
+
+.flame {
+  height: 400px;
+  width: 1000px;
+  background: url("flame-animation.svg");
 }
 
