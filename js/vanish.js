@@ -1,5 +1,7 @@
 const vanish = {
   activated: false,
+  wand1: chrome.extension.getURL('images/wand1.png'),
+  wand2: chrome.extension.getURL('images/wand2.png'),
 
   toggleVanish: function() {
     if (vanish.activated) {
@@ -16,7 +18,20 @@ const vanish = {
     document.addEventListener('mouseup', vanish.handlePrevent, true);
     document.addEventListener('click', vanish.handlePrevent, true);
     vanish.addDivHelper();
+
+    const static_wand = `*, *:hover { cursor: url(${vanish.wand1}), auto !important} `;
+    const active_wand = `*:active { cursor: url(${vanish.wand2}), auto !important}`;
+    const style = document.createElement('style');
+    style.appendChild(document.createTextNode(static_wand + active_wand));
+    document.getElementsByTagName('head')[0].appendChild(style);
+
+
+    // document.body.style.cursor = `url(${vanish.wand}), auto`;
+    // document.body.querySelectorAll('*').forEach(el => {
+    //   el.style.cursor = `url(${vanish.wand}), auto`;
+    // });
   },
+
 
   deactivateTargetMode: function() {
     document.removeEventListener('mousedown', vanish.removeEl, true);
