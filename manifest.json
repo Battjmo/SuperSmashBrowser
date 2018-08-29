@@ -14,7 +14,7 @@
   "activeTab"
 ],
   "content_scripts": [{
-    "matches": ["http://*/*", "https://*/*"],
+    "matches": ["http://*/*", "https://*/*", "file://*"],
     "js": ["content_script.js", "/js/vanish_everything.js"]
   }]
 }
