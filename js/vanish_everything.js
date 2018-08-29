@@ -14,6 +14,7 @@ class VanishEverything {
     this.disappear = this.disappear.bind(this);
   };
 
+
   disappear() {
     this.body.style.transition = 'all 1s';
     this.body.style.opacity = '0';
