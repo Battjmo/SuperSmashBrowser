@@ -1,3 +1,11 @@
+* {
+  cursor: url("hammer.png"), auto;
+}
+
+*:active {
+  cursor: url("sidewaysHammer.png"), auto;
+}
+
 html {
     height:100%;
 }

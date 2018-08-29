@@ -106,6 +106,7 @@ class Walls {
         }
 
         if (this.topPos + this.wallWidth < 0) {
+            console.log("stahp");
             this.stop = true;
         }
     }
