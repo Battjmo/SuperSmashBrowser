@@ -1,10 +1,10 @@
-/* * {
-  cursor: url("hammer.png"), auto;
+* {
+  cursor: url("/images/wandOutline.png"), auto;
 }
 
 *:active {
-  cursor: url("sidewaysHammer.png"), auto;
-} */
+  cursor: url("/images/starWandOutline.png"), auto;
+}
 
 html {
     height:100%;
