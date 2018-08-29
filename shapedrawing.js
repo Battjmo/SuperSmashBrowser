@@ -11,7 +11,7 @@
 // For now they will just be defined as rectangles.
 // w, h, fill
 
-import html2canvas from 'html2canvas';
+// import html2canvas from './html2canvas';
 
 function Shape(x, y, w, h) {
     // This is a very simple and unsafe constructor. All we're doing is checking if the values exist.
@@ -131,11 +131,15 @@ function CanvasState(canvas) {
     }, true);
 // , 20, 20, 'rgba(0,255,0,.6)'
     // **** Options! ****
-
+    
     this.selectionColor = '#CC0000';
     this.selectionWidth = 2;
     this.interval = 30;
     setInterval(function () { myState.draw(); }, myState.interval);
+    html2canvas(document.body).then(function (canvas) {
+        var newImage = canvas.toDataURL("image/png");
+        window.open(newImage, "_blank");
+    });
 }
 
 CanvasState.prototype.addShape = function (shape) {
@@ -241,10 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
     s.addShape(new Shape(80, 150, 60, 30, 'rgba(127, 255, 212, .5)'));
     s.addShape(new Shape(125, 80, 30, 80, 'rgba(245, 222, 179, .7)'));
 
-    html2canvas(document.body).then(function(canvas) {
-        var newImage = canvas.toDataURL("image/png");
-        window.open(newImage, "_blank");
-    });
+
 });
 
 
