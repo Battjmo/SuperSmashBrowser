@@ -1,8 +1,15 @@
 console.log('content script loaded');
 
 chrome.runtime.onMessage.addListener(function(request, sender) {
-  // vanish = new VanishEverything;
-  if (request.type === 'button') {
-    vanish.toggleVanish();
+  vanishEverything = new VanishEverything;
+  switch (request.type) {
+    case "ZapEverything":
+      vanishEverything.run();
+      break;
+    case "ZapElement":
+      vanish.toggleVanish();
+      break;
+    default:
+      break;
   }
 });
