@@ -1,5 +1,7 @@
 const vanish = {
   activated: false,
+  wand1: chrome.extension.getURL('images/wand1.png'),
+  wand2: chrome.extension.getURL('images/wand2.png'),
 
   toggleVanish: function() {
     if (vanish.activated) {
@@ -16,6 +18,13 @@ const vanish = {
     document.addEventListener('mouseup', vanish.handlePrevent, true);
     document.addEventListener('click', vanish.handlePrevent, true);
     vanish.addDivHelper();
+
+    const wandStyle = document.createElement('style');
+    const staticWand = `*, *:hover { cursor: url(${vanish.wand1}), auto !important} `;
+    const activeWand = `*:active { cursor: url(${vanish.wand2}) 3 13, auto !important}`;
+    wandStyle.id = 'super-smash-cursor';
+    wandStyle.appendChild(document.createTextNode(staticWand + activeWand));
+    document.getElementsByTagName('head')[0].appendChild(wandStyle);
   },
 
   deactivateTargetMode: function() {
@@ -23,6 +32,7 @@ const vanish = {
     document.removeEventListener('mouseup', vanish.handlePrevent, true);
     document.removeEventListener('click', vanish.handlePrevent, true);
     vanish.removeDivHelper();
+    document.getElementById('super-smash-cursor').remove();
   },
 
   removeEl: function(e) {
@@ -55,7 +65,7 @@ const vanish = {
         height: `${el.offsetHeight}px`,
         top: `${el.offsetTop - el.scrollTop}px`,
         left: `${el.offsetLeft - el.scrollLeft}px`,
-        background: 'rgba(0, 0, 0, 0.7)',
+        background: 'rgba(0, 0, 0, 0)',
         zIndex: '500'
       });
       el.parentNode.insertBefore(div, el.nextSibling);
@@ -85,143 +95,3 @@ const vanish = {
     }, 1000);
   }
 };
-
-
-
-// class Vanish {
-//   constructor() {
-//     // this.toggle = document.body.getElementById('toggle-vanish');
-//     this.activated = false;
-//     this.allChildren = this.allChildren.bind(this);
-//   }
-//
-//   toggleVanish() {
-//     if (this.activated) {
-//       this.activated = false;
-//       this.deactivateTargetMode();
-//     } else {
-//       this.activated = true;
-//       this.activateTargetMode();
-//     }
-//   }
-//
-//   activateTargetMode() {
-//     document.addEventListener('click', this.vanishEl);
-//   }
-//
-//   deactivateTargetMode() {
-//     document.removeEventListener('click', this.vanishEl);
-//   }
-//
-//   vanishEl(e) {
-//     e.preventDefault();
-//     console.log(e.target);
-//     debugger;
-//     const elements = this.allChildren(e.target);
-//     this.animate(elements, 100);
-//   }
-//
-//   allChildren(parent) {
-//     const queue = [parent];
-//     const nodes = [];
-//     let node;
-//     while (queue.length) {
-//       node = queue.pop();
-//       nodes.unshift(node);
-//
-//       for (let i = 0; i < node.children.length; i++) {
-//         queue.unshift(node.children[i]);
-//       }
-//     }
-//     return nodes;
-//   }
-//
-//   animate(nodes, delay) {
-//     if (nodes.length) {
-//       Object.assign(nodes[0].style, {
-//         transition: 'all 2s',
-//         fontSize: '0',
-//         opacity: '0'
-//       });
-//     	setTimeout(() => {
-//         Object.assign(nodes[0].style, {width: '0', height: '0'});
-//     		setTimeout(() => {
-//           nodes[0].style.display = 'none';
-//         }, 2000);
-//       }, 1000);
-//       this.animate(nodes.slice(1), delay);
-//     }
-//   }
-// }
-//
-// const vanish = new Vanish;
-// vanish.toggleVanish();
-//
-//
-//
-
-// // declare activation settings
-// const toggle = document.body.getElementById('toggle');
-// let activated = false;
-//
-// toggle.onclick = () => {
-//   if (activated) {
-//     activated = false;
-//     // deactivateTargetMode();
-//   } else {
-//     activated = true;
-//     activateTargetMode();
-//   }
-// };
-//
-//
-// // activate target mode
-// const activateTargetMode = () => {
-//   document.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     console.log(e.target);
-//     e.target.style.transition = 'all 2s';
-//     e.target.style.opacity = '0';
-//   });
-// };
-//
-//
-// // select children
-// const reverseBFT = (parent) => {
-//   const queue = [parent];
-//   const nodes = [];
-//   let node;
-//   while (queue.length) {
-//     node = queue.pop();
-//     nodes.unshift(node);
-//
-//     for (let i = 0; i < node.children.length; i++) {
-//       queue.unshift(node.children[i]);
-//     }
-//   }
-//   return nodes;
-// };
-//
-// // apply styling over children
-// const animate = (children, delay) => {
-//   if (children.length) {
-//     setTimeout(() => {
-//       children[0].style.opacity = '0';
-//       animate(children.slice(1), delay);
-//     }, delay);
-//   }
-// };
-//
-//
-// // document.addEventListener('click', (e) => {
-// //   e.preventDefault();
-// //   console.log(e.target);
-// //   e.target.style.transition = 'all 2s';
-// //   e.target.style.fontSize = '0';
-// // e.target.style.opacity = '0';
-// // setTimeout(() => {
-// //   e.target.style.width = '0';
-// //   e.target.style.height = '0';
-// //   setTimeout(() => e.target.style.display = 'none', 2000);
-// //   }, 1000);
-// // }, false);
