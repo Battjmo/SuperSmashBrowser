@@ -11,10 +11,10 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-  "tabs"
+  "activeTab"
 ],
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
-    "js": ["content_script.js"]
+    "js": ["content_script.js", "/js/vanish_everything.js"]
   }]
 }
