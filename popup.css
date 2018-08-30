@@ -1,4 +1,22 @@
+html {
+  background-color: darkgrey;
+}
+
 body {
   width: 300px;
   max-height: 600px;
+  align-self: center;
+  display: block;
+  font-size: 14px;
+  font-family: 'Amaranth', sans-serif;
+}
+
+.intro {
+
+  font-size: 18px;
+}
+
+.destroyButton {
+  font-size: 14px;
+  font-family: 'Amaranth', sans-serif;
 }
