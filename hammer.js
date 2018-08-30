@@ -23,7 +23,6 @@ function getMousePos(canvas, e) {
 
 function randomSmash() {
     smash = Math.floor(Math.random() * 4);
-    console.log(smash);
     return smashes[smash];
 }
 
@@ -32,7 +31,7 @@ document.addEventListener('click', e => {
         let mouse = getMousePos(e.target, e);
         draw(e.target, mouse.x, mouse.y);
         e.target.counter++;
-        console.log(e.target.counter);
+        console.log("counter: " , e.target.counter);
         if (e.target.counter === 5) {
             animate(e.target);
             animate(e.target.sibling);
@@ -52,7 +51,7 @@ const overlayCanvas = (e) => {
 
     canvas.width = e.target.offsetWidth;
     canvas.height = e.target.offsetHeight;
-    canvas.counter = 0;
+    canvas.counter = 1;
 
     canvas.style.position = 'absolute';
     canvas.style.border = 'solid 1px red';
@@ -65,7 +64,9 @@ const overlayCanvas = (e) => {
     canvas.zIndex = '5000';
     e.target.parentNode.insertBefore(canvas, e.target.nextSibling)
 
-    draw(canvas, e);
+    let mouse = getMousePos(canvas, e)
+
+    draw(canvas, mouse.x, mouse.y);
 };
 
 const draw = (canvas, x, y) => {
@@ -86,7 +87,7 @@ const draw = (canvas, x, y) => {
     let topY = smashY - smashed2.height;
     let bottomX = smashX;
     let bottomY = smashY + smashed2.height;
-
+    
 }
 
 const animate = (element) => {
