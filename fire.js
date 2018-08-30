@@ -1,6 +1,14 @@
 
-    var fire = new Image();
-    fire.src = "./flame-animation (1).svg";
+
+    var smashed1 = new Image();
+    var smashed2 = new Image();
+    var smashed3 = new Image();
+    var smashed4 = new Image();
+    smashed1.src = "./images/smashed.png";
+    smashed2.src = "./images/smashed_1.png";
+    smashed3.src = "./images/smashed_2.png";
+    smashed4.src = "./images/smashed_3.png";
+    let smashes = [smashed1, smashed2, smashed3, smashed4];
 
 function getMousePos(canvas, e) {
     var rect = canvas.getBoundingClientRect(), 
@@ -13,10 +21,22 @@ function getMousePos(canvas, e) {
     }
 }
 
+function randomSmash() {
+    smash = Math.floor(Math.random() * 4);
+    console.log(smash);
+    return smashes[smash];
+}
+
 document.addEventListener('click', e => {
     if (e.target.tagName === 'CANVAS') {
         let mouse = getMousePos(e.target, e);
         draw(e.target, mouse.x, mouse.y);
+        e.target.counter++;
+        console.log(e.target.counter);
+        if (e.target.counter === 5) {
+            animate(e.target);
+            animate(e.target.sibling);
+        }
     } else {
         overlayCanvas(e);
     }
@@ -32,6 +52,7 @@ const overlayCanvas = (e) => {
 
     canvas.width = e.target.offsetWidth;
     canvas.height = e.target.offsetHeight;
+    canvas.counter = 0;
 
     canvas.style.position = 'absolute';
     canvas.style.border = 'solid 1px red';
@@ -50,11 +71,33 @@ const overlayCanvas = (e) => {
 const draw = (canvas, x, y) => {
     const ctx = canvas.getContext('2d');
 
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, 2 * Math.PI);
-    ctx.fillStyle = 'blue';
-    ctx.fill();
-    ctx.stroke();
+    //draw initial smash
+    let smashX = x - (smashed1.width / 2);
+    let smashY = y - (smashed1.height / 2);
+    smash = randomSmash();
+    ctx.drawImage(smash, smashX, smashY);
 
-    ctx.drawImage(fire);
-};
+    //set coords for future smashes
+    let leftX = smashX - smashed2.width;
+    let leftY = smashY;
+    let rightX = smashX + smashed2.width;
+    let rightY = smashY;
+    let topX = smashX;
+    let topY = smashY - smashed2.height;
+    let bottomX = smashX;
+    let bottomY = smashY + smashed2.height;
+   
+    }
+
+    const animate = (element) => {
+    Object.assign(element.style, {
+        transition: 'all 1s',
+        fontSize: '0',
+        opacity: '0'
+    });
+    setTimeout(() => {
+        Object.assign(element.style, { width: '0', height: '0' });
+        setTimeout(() => { element.style.display = 'none'; }, 1000);
+    }, 1000);
+}
+
