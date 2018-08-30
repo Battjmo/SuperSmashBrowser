@@ -1,29 +1,28 @@
 
 
-    var smashed1 = new Image();
-    var smashed2 = new Image();
-    var smashed3 = new Image();
-    var smashed4 = new Image();
-    smashed1.src = "./images/smashed.png";
-    smashed2.src = "./images/smashed_1.png";
-    smashed3.src = "./images/smashed_2.png";
-    smashed4.src = "./images/smashed_3.png";
-    let smashes = [smashed1, smashed2, smashed3, smashed4];
+var smashed1 = new Image();
+var smashed2 = new Image();
+var smashed3 = new Image();
+var smashed4 = new Image();
+smashed1.src = "./images/smashed.png";
+smashed2.src = "./images/smashed_1.png";
+smashed3.src = "./images/smashed_2.png";
+smashed4.src = "./images/smashed_3.png";
+let smashes = [smashed1, smashed2, smashed3, smashed4];
 
 function getMousePos(canvas, e) {
-    var rect = canvas.getBoundingClientRect(), 
-        scaleX = canvas.width / rect.width,    
-        scaleY = canvas.height / rect.height;  
+    var rect = canvas.getBoundingClientRect(),
+        scaleX = canvas.width / rect.width,
+        scaleY = canvas.height / rect.height;
 
     return {
         x: (e.clientX - rect.left) * scaleX,
-        y: (e.clientY - rect.top) * scaleY    
+        y: (e.clientY - rect.top) * scaleY
     }
 }
 
 function randomSmash() {
     smash = Math.floor(Math.random() * 4);
-    console.log(smash);
     return smashes[smash];
 }
 
@@ -32,7 +31,7 @@ document.addEventListener('click', e => {
         let mouse = getMousePos(e.target, e);
         draw(e.target, mouse.x, mouse.y);
         e.target.counter++;
-        console.log(e.target.counter);
+        console.log("counter: " , e.target.counter);
         if (e.target.counter === 5) {
             animate(e.target);
             animate(e.target.sibling);
@@ -52,7 +51,7 @@ const overlayCanvas = (e) => {
 
     canvas.width = e.target.offsetWidth;
     canvas.height = e.target.offsetHeight;
-    canvas.counter = 0;
+    canvas.counter = 1;
 
     canvas.style.position = 'absolute';
     canvas.style.border = 'solid 1px red';
@@ -65,7 +64,9 @@ const overlayCanvas = (e) => {
     canvas.zIndex = '5000';
     e.target.parentNode.insertBefore(canvas, e.target.nextSibling)
 
-    draw(canvas, e);
+    let mouse = getMousePos(canvas, e)
+
+    draw(canvas, mouse.x, mouse.y);
 };
 
 const draw = (canvas, x, y) => {
@@ -86,10 +87,10 @@ const draw = (canvas, x, y) => {
     let topY = smashY - smashed2.height;
     let bottomX = smashX;
     let bottomY = smashY + smashed2.height;
-   
-    }
+    
+}
 
-    const animate = (element) => {
+const animate = (element) => {
     Object.assign(element.style, {
         transition: 'all 1s',
         fontSize: '0',

@@ -95,3 +95,5 @@ const vanish = {
     }, 1000);
   }
 };
+
+module.exports = vanish;
