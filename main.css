@@ -1,9 +1,9 @@
 * {
-  cursor: url("hammer.png"), auto;
+  cursor: url("/images/wandOutline.png"), auto;
 }
 
 *:active {
-  cursor: url("sidewaysHammer.png"), auto;
+  cursor: url("/images/starWandOutline.png"), auto;
 }
 
 html {
@@ -26,5 +26,11 @@ canvas {
 .test {
   position: absolute;
   z-index: 1;
+}
+
+.flame {
+  height: 400px;
+  width: 1000px;
+  background: url("flame-animation.svg");
 }
 
