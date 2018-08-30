@@ -15,6 +15,7 @@ Nearly every day, we see something on the internet that makes us angry or sad, a
 2. Trash compactor: walls come in from sides of the screen, crushing the content into a little box in the middle.
 3. Fire: user will click the screen to make a fire start there, which will consume the content.
 4. Earthquake: screen shake, followed by elements falling off the screen.
+
 Stretch Modes:
 1. Hammer: User can destroy elements by click
 2. Pac-Man: Contents get eaten by your favorite arcade hero.
