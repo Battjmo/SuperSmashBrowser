@@ -124,7 +124,7 @@
 .flame {
     width: 400px;
     height: 500px;
-    background: url("https://openclipart.org/download/225457/flame-spritesheet-02.svg") no-repeat 0 0;
+    background: url("/Users/thelampshade/Desktop/flame-spritesheet-02.svg") no-repeat 0 0;
 }
  
 .css .flame {

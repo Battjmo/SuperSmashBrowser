@@ -136,10 +136,6 @@ function CanvasState(canvas) {
     this.selectionWidth = 2;
     this.interval = 30;
     setInterval(function () { myState.draw(); }, myState.interval);
-    html2canvas(document.body).then(function (canvas) {
-        var newImage = canvas.toDataURL("image/png");
-        window.open(newImage, "_blank");
-    });
 }
 
 CanvasState.prototype.addShape = function (shape) {
