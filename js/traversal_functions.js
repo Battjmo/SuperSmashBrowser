@@ -1,20 +1,8 @@
 
 // Reverse Breadth First Traversal
-// Returns an array of all nodes from bottom up
-//
-//            A
-//          /  \
-//         /    \
-//        B      C
-//      /  \     \
-//     D   E      F
-//          \
-//          G
-//
-//     =>  [G, D, E, F, B, C, A]
-//
+// Returns an array of all nodes from bottom up right to left
 
-export const reverseBFT = (parent) => {
+const reverseBFT = (parent) => {
   const queue = [parent];
   const nodes = [];
   let node;
