@@ -2,14 +2,14 @@
     var fire = new Image();
     fire.src = "./flame-animation (1).svg";
 
-function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect(), // abs. size of element
-        scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for X
-        scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for Y
+function getMousePos(canvas, e) {
+    var rect = canvas.getBoundingClientRect(), 
+        scaleX = canvas.width / rect.width,    
+        scaleY = canvas.height / rect.height;  
 
     return {
-        x: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
-        y: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
+        x: (e.clientX - rect.left) * scaleX,
+        y: (e.clientY - rect.top) * scaleY    
     }
 }
 
@@ -56,5 +56,5 @@ const draw = (canvas, x, y) => {
     ctx.fill();
     ctx.stroke();
 
-    // ctx.drawImage(fire);
+    ctx.drawImage(fire);
 };
