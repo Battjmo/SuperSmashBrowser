@@ -1,22 +1,64 @@
 html {
-  background-color: darkgrey;
+
 }
 
 body {
-  width: 300px;
+  width: 310px;
   max-height: 600px;
   align-self: center;
   display: block;
-  font-size: 14px;
-  font-family: 'Amaranth', sans-serif;
+  font-size: 12px;
+
 }
 
 .intro {
-
-  font-size: 18px;
+  font-weight: bold;
+  font-size: 14px;
 }
 
-.destroyButton {
+Button {
+  border: none;
+  cursor: pointer;
   font-size: 14px;
-  font-family: 'Amaranth', sans-serif;
+  border-radius: 20px;
+  width: 150px;
+  height: 30px;
+  color: white;
+  background-color: black;
+  box-shadow: 2px 2px grey;
+
+}
+
+button:focus {outline:0;}
+
+.destroyButton1 {
+  background-color: #7F0000;
+
+}
+
+.destroyButton1:hover {
+  background-color: #FF0000;
+}
+
+
+Button:hover {
+  background-color: grey;
+}
+
+/* .buttons {
+  display: flex;
+  flex-direction: row;
+} */
+
+.zappers {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 3px;
+  align-items: center;
+}
+
+.description {
+  margin-left: 15px;
+  max-width: 150px;
 }
