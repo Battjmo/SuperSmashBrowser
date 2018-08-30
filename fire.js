@@ -1,80 +1,60 @@
-    const mainCanvas = document.getElementsByTagName("canvas")[0];
-    const ctx = mainCanvas.getContext("2d");
-    mainCanvas.width = window.innerWidth;
-    mainCanvas.height = window.innerHeight;
 
-
-
-    var mouseClicked = false, mouseReleased = true;
     var fire = new Image();
-    fire.src = "./flame-animation.svg";
+    fire.src = "./flame-animation (1).svg";
 
+function getMousePos(canvas, e) {
+    var rect = canvas.getBoundingClientRect(), 
+        scaleX = canvas.width / rect.width,    
+        scaleY = canvas.height / rect.height;  
 
-    document.addEventListener("click", onMouseClick, false);
-    document.addEventListener("mousemove", onMouseMove, false);
-
-    function onMouseClick(e) {
-        mouseClicked = !mouseClicked;
-        console.log(mouseClicked);
+    return {
+        x: (e.clientX - rect.left) * scaleX,
+        y: (e.clientY - rect.top) * scaleY    
     }
-
-function getMouse(e) {
-    var element = ctx, offsetX = 0, offsetY = 0, mx, my;
-    var html = document.body.parentNode;
-    let htmlTop = html.offsetTop;
-    let htmlLeft = html.offsetLeft;
-    // Compute the total offset
-    if (element.offsetParent !== undefined) {
-        console.log(element.offsetLeft);
-        do {
-            offsetX = element.offsetLeft;
-            offsetY = element.offsetTop;
-        } while ((element = element.offsetParent));
-    }
-
-    if (document.defaultView && document.defaultView.getComputedStyle) {
-        stylePaddingLeft = parseInt(document.defaultView.getComputedStyle(mainCanvas, null)['paddingLeft'], 10) || 0;
-        stylePaddingTop = parseInt(document.defaultView.getComputedStyle(mainCanvas, null)['paddingTop'], 10) || 0;
-        styleBorderLeft = parseInt(document.defaultView.getComputedStyle(mainCanvas, null)['borderLeftWidth'], 10) || 0;
-        styleBorderTop = parseInt(document.defaultView.getComputedStyle(mainCanvas, null)['borderTopWidth'], 10) || 0;
-    }
-    // Add padding and border style widths to offset
-    // Also add the <html> offsets in case there's a position:fixed bar
-    offsetX += stylePaddingLeft + styleBorderLeft + htmlLeft;
-    offsetY += stylePaddingTop + styleBorderTop + htmlTop;
-
-    mx = e.pageX - offsetX;
-    my = e.pageY - offsetY;
-
-    // We return a simple javascript object (a hash) with x and y defined
-    return { x: mx, y: my };
 }
 
-// function fade(target) {
-//     // create the fade animation
-//     var animation = document.createElementNS(
-//         "./images/flame-animation.svg", 'animate');
-//     animation.setAttributeNS(null, 'attributeName', 'fill-opacity');
-//     animation.setAttributeNS(null, 'begin', 'indefinite');
-//     animation.setAttributeNS(null, 'to', 0);
-//     animation.setAttributeNS(null, 'dur', 0.25);
-//     animation.setAttributeNS(null, 'fill', 'freeze');
-//     // link the animation to the target
-//     target.appendChild(animation);
-//     // start the animation
-//     animation.beginElement();
-// }
-
-    function onMouseMove(e) {
-        if (mouseClicked) {
-         let mouse = getMouse(e);
-            let mx = mouse.x;
-            let my = mouse.y
-            // fade(e)
-            // ctx.fillStyle = "#ffffff";
-            // ctx.fillRect(e.clientX, e.clientY, 50, 50);
-            // ctx.font = '50pt helvetica';
-            // ctx.fillText("🔥", e.clientX, e.clientY);
-            ctx.drawImage(fire, mx - 200, my - 350);
-        }
+document.addEventListener('click', e => {
+    if (e.target.tagName === 'CANVAS') {
+        let mouse = getMousePos(e.target, e);
+        draw(e.target, mouse.x, mouse.y);
+    } else {
+        overlayCanvas(e);
     }
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+});
+
+const overlayCanvas = (e) => {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'super-smash-canvas';
+    canvas.sibling = e.target;
+
+    canvas.width = e.target.offsetWidth;
+    canvas.height = e.target.offsetHeight;
+
+    canvas.style.position = 'absolute';
+    canvas.style.border = 'solid 1px red';
+    canvas.style.top = `${e.target.offsetTop}px`;
+    canvas.style.left = `${e.target.offsetLeft}px`;
+
+    canvas.style.padding = '0';
+    canvas.style.margin = '0';
+
+    canvas.zIndex = '5000';
+    e.target.parentNode.insertBefore(canvas, e.target.nextSibling)
+
+    draw(canvas, e);
+};
+
+const draw = (canvas, x, y) => {
+    const ctx = canvas.getContext('2d');
+
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, 2 * Math.PI);
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.drawImage(fire);
+};
