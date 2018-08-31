@@ -13,7 +13,9 @@ body {
 
 .intro {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 5px;
 }
 
 Button {
@@ -21,7 +23,7 @@ Button {
   cursor: pointer;
   font-size: 14px;
   border-radius: 20px;
-  width: 150px;
+  width: 125px;
   height: 30px;
   color: white;
   background-color: black;
@@ -40,6 +42,14 @@ button:focus {outline:0;}
   background-color: #FF0000;
 }
 
+.destroyButton3 {
+  background-color: #000066;
+
+}
+
+.destroyButton3:hover {
+  background-color: #0000ff;
+}
 
 Button:hover {
   background-color: grey;
