@@ -43,12 +43,12 @@ button:focus {outline:0;}
 }
 
 .destroyButton3 {
-  background-color: #000066;
+  background-color: #421010;
 
 }
 
 .destroyButton3:hover {
-  background-color: #0000ff;
+  background-color: #731d1d;
 }
 
 Button:hover {
@@ -67,6 +67,17 @@ Button:hover {
   margin-bottom: 3px;
   align-items: center;
   padding: 5px;
+  border-bottom: 1px solid black;
+}
+
+.zappersLast {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 3px;
+  align-items: center;
+
+  padding-top: 5px;
 }
 
 .description {

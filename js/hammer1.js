@@ -23,6 +23,13 @@ const hammer = {
     document.addEventListener('mouseup', hammer.handlePrevent, true);
     document.addEventListener('click', hammer.handlePrevent, true);
     hammer.addDivHelper();
+
+    const hammerStyle = document.createElement('style');
+    const staticHammer = `*, *:hover { cursor: url(${hammer.hammer1}), auto !important} `;
+    const activeHammer = `*:active { cursor: url(${hammer.hammer2}) 3 13, auto !important}`;
+    hammerStyle.id = 'super-smash-cursor';
+    hammerStyle.appendChild(document.createTextNode(staticHammer + activeHammer));
+    document.getElementsByTagName('head')[0].appendChild(hammerStyle);
   },
 
 
@@ -31,6 +38,7 @@ const hammer = {
     document.removeEventListener('mouseup', hammer.handlePrevent, true);
     document.removeEventListener('click', hammer.handlePrevent, true);
     hammer.removeDivHelper();
+    document.getElementById('super-smash-cursor').remove();
   },
 
   // getMousePos: function(canvas, e) {
@@ -94,6 +102,7 @@ const hammer = {
         left: `${el.offsetLeft - el.scrollLeft}px`,
         background: 'rgba(0, 0, 0, 0)',
         zIndex: '5000'
+
       });
       el.parentNode.insertBefore(div, el.nextSibling);
     });
@@ -163,6 +172,7 @@ const hammer = {
     let smashY = y - (smash.height / 2);
 
     ctx.drawImage(smash, smashX, smashY);
+    
   },
 
   animate: function (element) {
