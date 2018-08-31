@@ -26,7 +26,8 @@
     "js": [
       "content_script.js",
       "./js/vanish_everything.js",
-      "./js/vanish.js"
+      "./js/vanish.js",
+      "./js/hammer.js"
     ]
   }]
 }
