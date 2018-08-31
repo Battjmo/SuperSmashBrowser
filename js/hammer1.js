@@ -56,9 +56,10 @@ const hammer = {
         let mouse = hammer.getMousePos(e);
         hammer.draw(e.target, mouse.x, mouse.y);
         e.target.counter++;
-           if (e.target.counter === 5) {
-            hammer.animate(e.target);
-            hammer.animate(e.target.sibling);
+        console.log(e.target.counter);
+        if (e.target.counter === 5) {
+          hammer.animate(e.target);
+          hammer.animate(e.target.sibling);
         }
     } else {
         hammer.overlayCanvas(e);
@@ -84,8 +85,8 @@ const hammer = {
         height: `${el.offsetHeight}px`,
         top: `${el.offsetTop - el.scrollTop}px`,
         left: `${el.offsetLeft - el.scrollLeft}px`,
-        background: 'rgba(0, 0, 0, 0)',
-        zIndex: '500'
+        background: 'rgba(0, 0, 0, 0.5)',
+        zIndex: '500000'
       });
       el.parentNode.insertBefore(div, el.nextSibling);
     });
@@ -132,8 +133,6 @@ const hammer = {
       canvas.zIndex = '5000';
       e.target.parentNode.insertBefore(canvas, e.target.nextSibling);
       let mouse = hammer.getMousePos(e);
-      console.log("mouse pos in overlayCanvas: ", mouse.x, mouse.y)
-      hammer.draw(canvas, mouse.x, mouse.y);
       hammer.draw(canvas, mouse.x, mouse.y);
   },
 
@@ -156,6 +155,7 @@ const hammer = {
     let smashY = y - (smash.height / 2);
 
     ctx.drawImage(smash, smashX, smashY);
+    
   },
 
   animate: function (element) {
