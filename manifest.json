@@ -17,9 +17,9 @@
   "activeTab"
 ],
 "icons": {
-  "16": "./logo.png",
-  "48": "./logo48.png",
-  "128": "./logo128.png"
+  "16": ".images/logo16.png",
+  "48": ".images/logo48.png",
+  "128": ".images/logo128.png"
 },
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*", "file://*"],
@@ -27,7 +27,7 @@
       "content_script.js",
       "./js/vanish_everything.js",
       "./js/vanish.js",
-      "./js/hammer.js"
+      "./js/hammer1.js"
     ]
   }]
 }
