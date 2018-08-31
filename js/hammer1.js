@@ -59,14 +59,14 @@ const hammer = {
       hammer.draw(e.target, mouse.x, mouse.y);
       e.target.counter++;
       if (e.target.counter === 5) {
-        hammer.animate(e.target);
-        hammer.animate(e.target.sibling);
+        hammer.animateFall(e.target);
+        hammer.animateFall(e.target.sibling);
         if (e.target.sibling.sibling) {
-          hammer.animate(e.target.sibling.sibling);
+          hammer.animateFall(e.target.sibling.sibling);
         }
       }
     } else if (e.target.offsetHeight < 25 || e.target.offsetWidth < 25) {
-      hammer.animateFall(e);
+      hammer.animateFall(e.target);
     } else {
       hammer.overlayCanvas(e);
     }
@@ -74,17 +74,21 @@ const hammer = {
     return false;
   },
 
-  animateFall: function(e) {
+  animateFall: function(element) {
     const translateX = (Math.random() - 0.5) * window.innerWidth;
     const translateY = window.innerHeight;
 
-    Object.assign(e.target.style, {
+    Object.assign(element.style, {
       transition: 'all 1s',
       position: 'relative',
       transform: `translate(${translateX}px, ${translateY}px) rotate(360deg)`
     });
-    setTimeout(() => {e.target.style.opacity = '0';}, 500);
-    setTimeout(() => {e.target.style.visibility = 'hidden';}, 1500);
+    setTimeout(() => Object.assign(element.style, {
+      opacity: '0',
+      width: '0',
+      height: '0',
+    }));
+    setTimeout(() => {element.style.visibility = 'hidden';}, 1500);
   },
 
   addDivHelper: function() {
@@ -172,7 +176,7 @@ const hammer = {
     let smashY = y - (smash.height / 2);
 
     ctx.drawImage(smash, smashX, smashY);
-    
+
   },
 
   animate: function (element) {
