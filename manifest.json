@@ -2,10 +2,6 @@
   "name": "SuperSmashBrowser",
   "version": "1.0",
   "description": "Build an Extension!",
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
   "web_accessible_resources": [
     "images/*.png"
   ],
@@ -27,7 +23,7 @@
       "content_script.js",
       "./js/vanish_everything.js",
       "./js/vanish.js",
-      "./js/hammer1.js"
+      "./js/hammer.js"
     ]
   }]
 }

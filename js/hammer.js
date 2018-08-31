@@ -1,50 +1,139 @@
+const hammer = {
+  activated: false,
+  smashed1: new Image().src = chrome.extension.getURL("./images/smashed_1.png"),
+  smashed2: new Image().src = chrome.extension.getURL("./images/smashed.png"),
+  smashed3: new Image().src = chrome.extension.getURL("./images/smashed_2.png"),
+  smashed4: new Image().src = chrome.extension.getURL("./images/smashed_3.png"),
+  hammer1: chrome.extension.getURL('images/hammer.png'),
+  hammer2: chrome.extension.getURL('images/hammerSideways.png'),
 
 
-var smashed1 = new Image();
-var smashed2 = new Image();
-var smashed3 = new Image();
-var smashed4 = new Image();
-smashed1.src = "./images/smashed.png";
-smashed2.src = "./images/smashed_1.png";
-smashed3.src = "./images/smashed_2.png";
-smashed4.src = "./images/smashed_3.png";
-let smashes = [smashed1, smashed2, smashed3, smashed4];
+  toggleHammer: function() {
+    if (hammer.activated) {
+      hammer.activated = false;
+      hammer.deactivateTargetMode();
+    } else {
+      hammer.activated = true;
+      hammer.activateTargetMode();
+    }
+  },
 
-function getMousePos(canvas, e) {
-    var rect = canvas.getBoundingClientRect(),
-        scaleX = canvas.width / rect.width,
-        scaleY = canvas.height / rect.height;
+  activateTargetMode: function() {
+    document.addEventListener('mousedown', hammer.execute, true);
+    document.addEventListener('mouseup', hammer.handlePrevent, true);
+    document.addEventListener('click', hammer.handlePrevent, true);
+    hammer.addDivHelper();
+
+    const hammerStyle = document.createElement('style');
+    const staticHammer = `*, *:hover { cursor: url(${hammer.hammer1}), auto !important} `;
+    const activeHammer = `*:active { cursor: url(${hammer.hammer2}), auto !important}`;
+    hammerStyle.id = 'super-smash-cursor';
+    hammerStyle.appendChild(document.createTextNode(staticHammer + activeHammer));
+    document.getElementsByTagName('head')[0].appendChild(hammerStyle);
+  },
+
+
+  deactivateTargetMode: function() {
+    document.removeEventListener('mousedown', hammer.execute, true);
+    document.removeEventListener('mouseup', hammer.handlePrevent, true);
+    document.removeEventListener('click', hammer.handlePrevent, true);
+    hammer.removeDivHelper();
+    document.getElementById('super-smash-cursor').remove();
+  },
+
+  execute: function(e) {
+    let element = e.target;
+
+    if (element.tagName === 'CANVAS') {
+      let mouse = hammer.getMousePos(e);
+      hammer.draw(element, mouse.x, mouse.y);
+      element.counter++;
+      if (element.counter === 5) {
+        hammer.animateFall(element);
+        hammer.animateFall(element.sibling);
+        if (element.sibling.sibling) {
+          hammer.animateFall(element.sibling.sibling);
+        }
+      }
+    } else if (element.offsetHeight < 25 || element.offsetWidth < 25) {
+      const tags = ['B', 'CODE', 'STRONG'];
+      if (tags.includes(element.nodeName)) {
+        hammer.animateFall(element.parentNode);
+      } else {
+        hammer.animateFall(element);
+      }
+    } else {
+      hammer.overlayCanvas(e);
+    }
+
+    // relocate div helpers
+    setTimeout(() => {
+      hammer.removeDivHelper();
+      hammer.addDivHelper();
+    }, 3000);
+
+    hammer.handlePrevent(e);
+    return false;
+  },
+
+  animateFall: function(element) {
+    const translateX = (Math.random() - 0.5) * window.innerWidth;
+    const translateY = window.innerHeight;
+
+    Object.assign(element.style, {
+      transition: 'all 1s',
+      position: 'relative',
+      transform: `translate(${translateX}px, ${translateY}px) rotate(360deg)`,
+      opacity: '0',
+      width: '0',
+      height: '0',
+    });
+    setTimeout(() => {element.style.visibility = 'hidden';}, 1500);
+  },
+
+  addDivHelper: function() {
+    const els = document.querySelectorAll('iframe, embed');
+
+    els.forEach(el => {
+      let div = document.createElement('div');
+      div.className = 'super-smash-div-helper';
+      div.sibling = el;
+      Object.assign(div.style, {
+        position: 'absolute',
+        width: `${el.offsetWidth}px`,
+        height: `${el.offsetHeight}px`,
+        top: `${el.offsetTop - el.scrollTop}px`,
+        left: `${el.offsetLeft - el.scrollLeft}px`,
+        background: 'rgba(0, 0, 0, 0)',
+        zIndex: '5000'
+
+      });
+      el.parentNode.insertBefore(div, el.nextSibling);
+    });
+  },
+
+  removeDivHelper: function() {
+    const divs = document.querySelectorAll('.super-smash-div-helper');
+    divs.forEach(div => div.remove());
+  },
+
+  randomSmash: function(smashes) {
+    let smash = Math.floor(Math.random() * 4);
+    return smashes[smash];
+  },
+
+  getMousePos: function(e) {
+    const rect = e.target.getBoundingClientRect();
+    const scaleX = e.target.offsetWidth / rect.width;
+    const scaleY = e.target.offsetHeight / rect.height;
 
     return {
         x: (e.clientX - rect.left) * scaleX,
         y: (e.clientY - rect.top) * scaleY
-    }
-}
+    };
+  },
 
-function randomSmash() {
-    smash = Math.floor(Math.random() * 4);
-    return smashes[smash];
-}
-
-document.addEventListener('click', e => {
-    if (e.target.tagName === 'CANVAS') {
-        let mouse = getMousePos(e.target, e);
-        draw(e.target, mouse.x, mouse.y);
-        e.target.counter++;
-        console.log("counter: " , e.target.counter);
-        if (e.target.counter === 5) {
-            animate(e.target);
-            animate(e.target.sibling);
-        }
-    } else {
-        overlayCanvas(e);
-    }
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
-});
-
-const overlayCanvas = (e) => {
+  overlayCanvas: function(e) {
     const canvas = document.createElement('canvas');
     canvas.className = 'super-smash-canvas';
     canvas.sibling = e.target;
@@ -53,52 +142,60 @@ const overlayCanvas = (e) => {
     canvas.height = e.target.offsetHeight;
     canvas.counter = 1;
 
-    canvas.style.position = 'absolute';
-    canvas.style.border = 'solid 1px red';
-    canvas.style.top = `${e.target.offsetTop}px`;
-    canvas.style.left = `${e.target.offsetLeft}px`;
+    Object.assign(canvas.style, {
+      position: 'absolute',
+      top: `${e.target.offsetTop}px`,
+      left: `${e.target.offsetLeft}px`,
+      padding: '0',
+      margin: '0',
+      zIndex: '5000'
+    });
+    // canvas.style.border = 'solid 1px red';
 
-    canvas.style.padding = '0';
-    canvas.style.margin = '0';
+    if (e.target.parentNode.nodeName === '#document') return;
 
-    canvas.zIndex = '5000';
-    e.target.parentNode.insertBefore(canvas, e.target.nextSibling)
+    e.target.parentNode.insertBefore(canvas, e.target.nextSibling);
+    let mouse = hammer.getMousePos(e);
+    hammer.draw(canvas, mouse.x, mouse.y);
+  },
 
-    let mouse = getMousePos(canvas, e)
-    console.log("mouse pos in overlayCanvas: ", mouse.x, mouse.y)
-    draw(canvas, mouse.x, mouse.y);
-};
+  draw: function(canvas, x, y) {
+    let smashed1 = new Image();
+    let smashed2 = new Image();
+    let smashed3 = new Image();
+    let smashed4 = new Image();
+    smashed1.src = chrome.extension.getURL("./images/smashed_1.png");
+    smashed2.src = chrome.extension.getURL("./images/smashed.png");
+    smashed3.src = chrome.extension.getURL("./images/smashed_2.png");
+    smashed4.src = chrome.extension.getURL("./images/smashed_3.png");
 
-const draw = (canvas, x, y) => {
     const ctx = canvas.getContext('2d');
+    let smashes = [smashed1, smashed2, smashed3, smashed4];
 
     //draw initial smash
-    let smashX = x - (smashed1.width / 2);
-    let smashY = y - (smashed1.height / 2);
-    smash = randomSmash();
+    let smash = hammer.randomSmash(smashes);
+    let smashX = x - (smash.width / 2);
+    let smashY = y - (smash.height / 2);
+
     ctx.drawImage(smash, smashX, smashY);
+  },
 
-    //set coords for future smashes
-    let leftX = smashX - smashed2.width;
-    let leftY = smashY;
-    let rightX = smashX + smashed2.width;
-    let rightY = smashY;
-    let topX = smashX;
-    let topY = smashY - smashed2.height;
-    let bottomX = smashX;
-    let bottomY = smashY + smashed2.height;
-    
-}
-
-const animate = (element) => {
+  animate: function (element) {
     Object.assign(element.style, {
-        transition: 'all 1s',
-        fontSize: '0',
-        opacity: '0'
+      transition: 'all 1s',
+      fontSize: '0',
+      opacity: '0'
     });
-    setTimeout(() => {
-        Object.assign(element.style, { width: '0', height: '0' });
-        setTimeout(() => { element.style.display = 'none'; }, 1000);
-    }, 1000);
-}
 
+    setTimeout(() => {
+      Object.assign(element.style, { width: '0', height: '0' });
+      setTimeout(() => { element.style.display = 'none'; }, 1000);
+    }, 1000);
+  },
+
+  handlePrevent: function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+};
