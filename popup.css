@@ -66,8 +66,8 @@ Button:hover {
   font-size: 14px;
   margin-bottom: 3px;
   align-items: center;
+  padding: 5px;
   border-bottom: 1px solid black;
-  padding: 5px 0;
 }
 
 .zappersLast {
