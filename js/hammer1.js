@@ -6,7 +6,7 @@ const hammer = {
   smashed4: new Image().src = chrome.extension.getURL("./images/smashed_3.png"),
   hammer1: chrome.extension.getURL('images/hammer.png'),
   hammer2: chrome.extension.getURL('images/hammerSideways.png'),
-  
+
 
   toggleHammer: function() {
     if (hammer.activated) {
@@ -45,24 +45,39 @@ const hammer = {
   // },
 
   execute: function(e) {
+    // console.log(e.target);
     if (e.target.tagName === 'CANVAS') {
-        let mouse = hammer.getMousePos(e);
-        hammer.draw(e.target, mouse.x, mouse.y);
-        e.target.counter++;
-           if (e.target.counter === 5) {
-            hammer.animate(e.target);
-            hammer.animate(e.target.sibling);
+      let mouse = hammer.getMousePos(e);
+      hammer.draw(e.target, mouse.x, mouse.y);
+      e.target.counter++;
+      if (e.target.counter === 5) {
+        hammer.animate(e.target);
+        hammer.animate(e.target.sibling);
+        if (e.target.sibling.sibling) {
+          hammer.animate(e.target.sibling.sibling);
         }
+      }
+    } else if (e.target.offsetHeight < 25 || e.target.offsetWidth < 25) {
+      hammer.animateFall(e);
     } else {
-        hammer.overlayCanvas(e);
+      hammer.overlayCanvas(e);
     }
     hammer.handlePrevent(e);
     return false;
   },
 
-  animateSpin: function(e) {},
+  animateFall: function(e) {
+    const translateX = (Math.random() - 0.5) * window.innerWidth;
+    const translateY = window.innerHeight;
 
-  animateFall: function(e) {},
+    Object.assign(e.target.style, {
+      transition: 'all 1s',
+      position: 'relative',
+      transform: `translate(${translateX}px, ${translateY}px) rotate(360deg)`
+    });
+    setTimeout(() => {e.target.style.opacity = '0';}, 500);
+    setTimeout(() => {e.target.style.visibility = 'hidden';}, 1500);
+  },
 
   addDivHelper: function() {
     const els = document.querySelectorAll('iframe, embed');
@@ -78,7 +93,7 @@ const hammer = {
         top: `${el.offsetTop - el.scrollTop}px`,
         left: `${el.offsetLeft - el.scrollLeft}px`,
         background: 'rgba(0, 0, 0, 0)',
-        zIndex: '500'
+        zIndex: '5000'
       });
       el.parentNode.insertBefore(div, el.nextSibling);
     });
@@ -106,28 +121,27 @@ const hammer = {
   },
 
   overlayCanvas: function(e) {
-      const canvas = document.createElement('canvas');
-      canvas.className = 'super-smash-canvas';
-      canvas.sibling = e.target;
+    const canvas = document.createElement('canvas');
+    canvas.className = 'super-smash-canvas';
+    canvas.sibling = e.target;
 
-      canvas.width = e.target.offsetWidth;
-      canvas.height = e.target.offsetHeight;
-      canvas.counter = 1;
+    canvas.width = e.target.offsetWidth;
+    canvas.height = e.target.offsetHeight;
+    canvas.counter = 1;
 
-      canvas.style.position = 'absolute';
-      canvas.style.border = 'solid 1px red';
-      canvas.style.top = `${e.target.offsetTop}px`;
-      canvas.style.left = `${e.target.offsetLeft}px`;
+    Object.assign(canvas.style, {
+      position: 'absolute',
+      top: `${e.target.offsetTop}px`,
+      left: `${e.target.offsetLeft}px`,
+      padding: '0',
+      margin: '0',
+      zIndex: '5000'
+    });
+    // canvas.style.border = 'solid 1px red';
 
-      canvas.style.padding = '0';
-      canvas.style.margin = '0';
-
-      canvas.zIndex = '5000';
-      e.target.parentNode.insertBefore(canvas, e.target.nextSibling);
-      let mouse = hammer.getMousePos(e);
-      console.log("mouse pos in overlayCanvas: ", mouse.x, mouse.y)
-      hammer.draw(canvas, mouse.x, mouse.y);
-      hammer.draw(canvas, mouse.x, mouse.y);
+    e.target.parentNode.insertBefore(canvas, e.target.nextSibling);
+    let mouse = hammer.getMousePos(e);
+    hammer.draw(canvas, mouse.x, mouse.y);
   },
 
   draw: function(canvas, x, y) {
@@ -141,13 +155,13 @@ const hammer = {
     smashed4.src = chrome.extension.getURL("./images/smashed_3.png");
 
     const ctx = canvas.getContext('2d');
-    let smashes= [smashed1, smashed2, smashed3, smashed4];
+    let smashes = [smashed1, smashed2, smashed3, smashed4];
 
     //draw initial smash
     let smash = hammer.randomSmash(smashes);
     let smashX = x - (smash.width / 2);
     let smashY = y - (smash.height / 2);
-    
+
     ctx.drawImage(smash, smashX, smashY);
   },
 
