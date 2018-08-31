@@ -6,7 +6,7 @@ const hammer = {
   smashed4: new Image().src = chrome.extension.getURL("./images/smashed_3.png"),
   hammer1: chrome.extension.getURL('images/hammer.png'),
   hammer2: chrome.extension.getURL('images/hammerSideways.png'),
-  
+
 
   toggleHammer: function() {
     if (hammer.activated) {
@@ -23,6 +23,13 @@ const hammer = {
     document.addEventListener('mouseup', hammer.handlePrevent, true);
     document.addEventListener('click', hammer.handlePrevent, true);
     hammer.addDivHelper();
+
+    const hammerStyle = document.createElement('style');
+    const staticHammer = `*, *:hover { cursor: url(${hammer.hammer1}), auto !important} `;
+    const activeHammer = `*:active { cursor: url(${hammer.hammer2}) 3 13, auto !important}`;
+    hammerStyle.id = 'super-smash-cursor';
+    hammerStyle.appendChild(document.createTextNode(staticHammer + activeHammer));
+    document.getElementsByTagName('head')[0].appendChild(hammerStyle);
   },
 
 
@@ -147,7 +154,7 @@ const hammer = {
     let smash = hammer.randomSmash(smashes);
     let smashX = x - (smash.width / 2);
     let smashY = y - (smash.height / 2);
-    
+
     ctx.drawImage(smash, smashX, smashY);
   },
 
