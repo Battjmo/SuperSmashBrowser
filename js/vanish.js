@@ -96,4 +96,4 @@ const vanish = {
   }
 };
 
-module.exports = vanish;
+

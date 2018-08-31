@@ -18,6 +18,16 @@ button2.addEventListener("click", function() {
   })
 });
 
+let button3 = document.getElementById('SmashElement');
+
+button3.addEventListener("click", function () {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    console.log("click regiestered in popup");
+
+    chrome.tabs.sendMessage(tabs[0].id, { type: `${button3.id}` });
+  })
+});
+
 
 let timesClick = 0;
 

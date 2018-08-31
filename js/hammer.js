@@ -65,7 +65,7 @@ const overlayCanvas = (e) => {
     e.target.parentNode.insertBefore(canvas, e.target.nextSibling)
 
     let mouse = getMousePos(canvas, e)
-
+    console.log("mouse pos in overlayCanvas: ", mouse.x, mouse.y)
     draw(canvas, mouse.x, mouse.y);
 };
 
