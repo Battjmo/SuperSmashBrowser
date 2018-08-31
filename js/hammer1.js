@@ -38,6 +38,7 @@ const hammer = {
     document.removeEventListener('mouseup', hammer.handlePrevent, true);
     document.removeEventListener('click', hammer.handlePrevent, true);
     hammer.removeDivHelper();
+    document.getElementById('super-smash-cursor').remove();
   },
 
   // getMousePos: function(canvas, e) {
