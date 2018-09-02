@@ -1,6 +1,6 @@
 # Super Smash Browswer: A Chrome Extension for Venting Frustration
 
-[Get It Here!]()
+[Get It Here!](https://chrome.google.com/webstore/detail/supersmashbrowser/bdlmjfkblpjnkienagkgljcodcgjjjml)
 
 ![Disappearing GIF](https://media.giphy.com/media/22RxGPGrf1UAcZobWC/giphy.gif)
 
