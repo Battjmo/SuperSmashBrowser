@@ -1,12 +1,7 @@
 const hammer = {
   activated: false,
-  smashed1: new Image().src = chrome.extension.getURL("./images/smashed_1.png"),
-  smashed2: new Image().src = chrome.extension.getURL("./images/smashed.png"),
-  smashed3: new Image().src = chrome.extension.getURL("./images/smashed_2.png"),
-  smashed4: new Image().src = chrome.extension.getURL("./images/smashed_3.png"),
   hammer1: chrome.extension.getURL('images/hammer.png'),
   hammer2: chrome.extension.getURL('images/hammerSideways.png'),
-
 
   toggleHammer: function() {
     if (hammer.activated) {
@@ -23,6 +18,7 @@ const hammer = {
     document.addEventListener('mouseup', hammer.handlePrevent, true);
     document.addEventListener('click', hammer.handlePrevent, true);
     hammer.addDivHelper();
+    hammer.addModeDisplay();
 
     const hammerStyle = document.createElement('style');
     const staticHammer = `*, *:hover { cursor: url(${hammer.hammer1}), auto !important} `;
@@ -37,26 +33,18 @@ const hammer = {
     document.removeEventListener('mousedown', hammer.execute, true);
     document.removeEventListener('mouseup', hammer.handlePrevent, true);
     document.removeEventListener('click', hammer.handlePrevent, true);
-    hammer.removeDivHelper();
     document.getElementById('super-smash-cursor').remove();
+    document.getElementById('super-smash-mode-div').remove();
+    hammer.removeDivHelper();
   },
 
   execute: function(e) {
     let element = e.target;
 
     if (element.tagName === 'CANVAS') {
-      let mouse = hammer.getMousePos(e);
-      hammer.draw(element, mouse.x, mouse.y);
-      element.counter++;
-      if (element.counter === 5) {
-        hammer.animateFall(element);
-        hammer.animateFall(element.sibling);
-        if (element.sibling.sibling) {
-          hammer.animateFall(element.sibling.sibling);
-        }
-      }
+      hammer.handleCanvas(e);
     } else if (element.offsetHeight < 25 || element.offsetWidth < 25) {
-      const tags = ['B', 'CODE', 'STRONG'];
+      const tags = ['B', 'I', 'STRONG', 'CODE'];
       if (tags.includes(element.nodeName)) {
         hammer.animateFall(element.parentNode);
       } else {
@@ -74,6 +62,19 @@ const hammer = {
 
     hammer.handlePrevent(e);
     return false;
+  },
+
+  handleCanvas: function(e) {
+    let mouse = hammer.getMousePos(e);
+    hammer.draw(e.target, mouse.x, mouse.y);
+    e.target.counter++;
+    if (e.target.counter === 5) {
+      hammer.animateFall(e.target);
+      hammer.animateFall(e.target.sibling);
+      if (e.target.sibling.sibling) {
+        hammer.animateFall(e.target.sibling.sibling);
+      }
+    }
   },
 
   animateFall: function(element) {
@@ -178,6 +179,34 @@ const hammer = {
     let smashY = y - (smash.height / 2);
 
     ctx.drawImage(smash, smashX, smashY);
+  },
+
+  addModeDisplay: function() {
+    const display = document.createElement('div');
+    display.id = 'super-smash-mode-div';
+    display.innerHTML = 'Smash Mode Activated!';
+
+    Object.assign(display.style, {
+      position: 'fixed',
+      top: '10px',
+      left: '10px',
+      padding: '10px',
+      fontFamily: 'Comic Sans MS, sans-serif',
+      fontSize: '15px',
+      color: '#fff',
+      backgroundColor: '#fe1a29',
+      border: '1px solid #acadaf',
+      borderRadius: '3px',
+      zIndex: '10000',
+      opacity: '0'
+    });
+
+    document.body.appendChild(display);
+
+    setTimeout(() => {
+      display.style.transition = 'opacity 0.5s';
+      display.style.opacity = '0.9';
+    }, 500);
   },
 
   animate: function (element) {
