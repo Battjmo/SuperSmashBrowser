@@ -1,7 +1,7 @@
 {
   "name": "SuperSmashBrowser",
-  "version": "0.0.1",
-  "description": "Build an Extension!",
+  "version": "0.0.2",
+  "description": "Take our your anger on your browser!",
   "web_accessible_resources": [
     "images/*.png"
   ],
