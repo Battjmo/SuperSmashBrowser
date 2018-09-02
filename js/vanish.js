@@ -18,6 +18,7 @@ const vanish = {
     document.addEventListener('mouseup', vanish.handlePrevent, true);
     document.addEventListener('click', vanish.handlePrevent, true);
     vanish.addDivHelper();
+    vanish.addModeDisplay();
 
     const wandStyle = document.createElement('style');
     const staticWand = `*, *:hover { cursor: url(${vanish.wand1}), auto !important} `;
@@ -31,8 +32,9 @@ const vanish = {
     document.removeEventListener('mousedown', vanish.removeEl, true);
     document.removeEventListener('mouseup', vanish.handlePrevent, true);
     document.removeEventListener('click', vanish.handlePrevent, true);
-    vanish.removeDivHelper();
     document.getElementById('super-smash-cursor').remove();
+    document.getElementById('super-smash-mode-div').remove();
+    vanish.removeDivHelper();
   },
 
   removeEl: function(e) {
@@ -77,10 +79,32 @@ const vanish = {
     divs.forEach(div => div.remove());
   },
 
-  handlePrevent(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
+  addModeDisplay: function() {
+    const display = document.createElement('div');
+    display.id = 'super-smash-mode-div';
+    display.innerHTML = 'Wand Mode Activated!';
+
+    Object.assign(display.style, {
+      position: 'fixed',
+      top: '10px',
+      left: '10px',
+      padding: '10px',
+      fontFamily: 'Comic Sans MS, sans-serif',
+      fontSize: '15px',
+      color: '#fff',
+      backgroundColor: '#fe1a29',
+      border: '1px solid #acadaf',
+      borderRadius: '3px',
+      zIndex: '10000',
+      opacity: '0'
+    });
+
+    document.body.appendChild(display);
+
+    setTimeout(() => {
+      display.style.transition = 'opacity 0.5s';
+      display.style.opacity = '0.9';
+    }, 500);
   },
 
   animate: function(element) {
@@ -89,9 +113,16 @@ const vanish = {
       fontSize: '0',
       opacity: '0'
     });
+
     setTimeout(() => {
       Object.assign(element.style, {width: '0', height: '0'});
-      setTimeout(() => {element.style.display = 'none';}, 1000);
+      setTimeout(() => { element.style.display = 'none'; }, 1000);
     }, 1000);
+  },
+
+  handlePrevent(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
   }
 };
