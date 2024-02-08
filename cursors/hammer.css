@@ -1,0 +1,7 @@
+*, *:hover {
+    cursor: url('images/hammer.png'), pointer !important;
+}
+
+*:active {
+    cursor: url('images/hammerSideways.png'), pointer !important;
+}
